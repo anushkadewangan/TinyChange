@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Tracking.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Tracking.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\js\\chart-interop.js",
+      "PackagePath": "staticwebassets\\js\\chart-interop.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Tracking.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Tracking.props",
+      "PackagePath": "build\\Tracking.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Tracking.props",
+      "PackagePath": "buildMultiTargeting\\Tracking.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Tracking.props",
+      "PackagePath": "buildTransitive\\Tracking.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,236 @@
+@page "/sleep"
+@using System.Drawing
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+
+<h3>Sleep Tracking</h3>
+
+<style>
+    .sleep-input {
+        background-color: transparent !important;
+        border: none;
+        width: 100%;
+    }
+    
+    .grid-cell {
+        padding: 0 !important;
+        transition: background-color 0.3s ease;
+    }
+    
+    .sleep-input:focus {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        outline: none;
+        box-shadow: none;
+    }
+</style>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Month</th>
+                @for (int day = 1; day <= 31; day++)
+                {
+                    <th>@day</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var month in _months)
+            {
+                <tr>
+                    <td>@month</td>
+                    @for (int day = 1; day <= 31; day++)
+                    {
+                        var adjustedDay = day - 1; // Calculate this once
+                        <td class="grid-cell" style="@GetCellBackgroundColor(_sleepData[Array.IndexOf(_months, month), adjustedDay])">
+                            <input type="number" 
+                                   class="form-control sleep-input" 
+                                   min="0" 
+                                   max="24" 
+                                   step="0.5"
+                                   value="@(_sleepData[Array.IndexOf(_months, month), adjustedDay])"
+                                   @onchange="@(e => UpdateSleepData(Array.IndexOf(_months, month), adjustedDay, e))" />
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<button class="btn btn-primary mb-3" @onclick="SaveData">Save Data</button>
+
+<div class="chart-container mt-4">
+    <canvas id="sleepChart"></canvas>
+</div>
+
+<div class="mt-4">
+    <h4>Saved Sleep Data (@_savedData.Count entries):</h4>
+    @if (_savedData.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in _savedData)
+                    {
+                        <tr>
+                            <td>@entry.Date</td>
+                            <td>@entry.Hours</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p>No data has been saved yet.</p>
+    }
+</div>
+
+@code {
+    private class SleepEntry
+    {
+        public required string Date { get; set; }
+        public double Hours { get; set; }
+    }
+
+    private readonly string[] _months = new[]
+    {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
+
+    private double?[,] _sleepData = new double?[12, 31];
+    private List<SleepEntry> _savedData = new List<SleepEntry>();
+
+    private void SaveData()
+    {
+        var newSavedData = new List<SleepEntry>();
+        int countNonNull = 0;
+        for (int month = 0; month < 12; month++)
+        {
+            for (int day = 0; day < 31; day++)
+            {
+                if (_sleepData[month, day].HasValue)
+                {
+                    countNonNull++;
+                    newSavedData.Add(new SleepEntry
+                    {
+                        Date = $"{_months[month]} {day + 1}",
+                        Hours = _sleepData[month, day].Value
+                    });
+                }
+            }
+        }
+
+        _savedData = newSavedData
+            .OrderBy(x => DateTime.ParseExact(x.Date, "MMMM d", System.Globalization.CultureInfo.InvariantCulture))
+            .ToList();
+
+        StateHasChanged();
+    }
+
+
+    private Random _random = new Random();
+
+    private async Task UpdateChartAsync()
+    {
+        var labels = new List<string>();
+        var data = new List<double?>();
+
+        for (int month = 0; month < 12; month++)
+        {
+            for (int day = 0; day < 31; day++)
+            {
+                if (_sleepData[month, day].HasValue)
+                {
+                    labels.Add($"{_months[month]} {day + 1}");
+                    data.Add(_sleepData[month, day]);
+                }
+            }
+        }
+
+        var chartData = new
+        {
+            type = "line",
+            data = new
+            {
+                labels = labels,
+                datasets = new[]
+                {
+                    new
+                    {
+                        label = "Sleep Hours",
+                        data = data,
+                        borderColor = "#007bff",
+                        tension = 0.1,
+                        fill = false
+                    }
+                }
+            },
+            options = new
+            {
+                responsive = true,
+                scales = new
+                {
+                    y = new
+                    {
+                        beginAtZero = true,
+                        max = 24,
+                        title = new
+                        {
+                            display = true,
+                            text = "Hours"
+                        }
+                    }
+                }
+            }
+        };
+
+        await JSRuntime.InvokeVoidAsync("createChart", "sleepChart", chartData);
+    }
+
+    private async Task UpdateSleepData(int month, int day, ChangeEventArgs e)
+    {
+        // Validate indices
+        if (month < 0 || month >= 12 || day < 0 || day >= 31)
+        {
+            return;
+        }
+        var value = e.Value?.ToString();
+        if (string.IsNullOrEmpty(value))
+        {
+            _sleepData[month, day] = null;
+        }
+        else if (double.TryParse(value, out double parsedValue))
+        {
+            _sleepData[month, day] = parsedValue;
+        }
+        
+        await UpdateChartAsync();
+    }
+
+    private string GetCellBackgroundColor(double? hours)
+    {
+        if (!hours.HasValue) return "background-color: transparent;";
+        
+        // Calculate the intensity (0 to 1) based on hours (0 to 24)
+        double intensity = hours.Value / 24.0;
+        
+        // Create a color gradient from light green to dark green
+        // RGB values: light green (220, 255, 220) to dark green (0, 100, 0)
+        int red = (int)(220 - (220 * intensity));
+        int green = (int)(255 - (155 * intensity));
+        int blue = (int)(220 - (220 * intensity));
+        
+        return $"background-color: rgb({red}, {green}, {blue});";
+    }
+}
