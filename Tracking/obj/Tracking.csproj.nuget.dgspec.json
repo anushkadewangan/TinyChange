@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\Tracking.csproj": {}
+    "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\Tracking.csproj": {}
   },
   "projects": {
-    "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\Tracking.csproj": {
+    "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\Tracking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\Tracking.csproj",
+        "projectUniqueName": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\Tracking.csproj",
         "projectName": "Tracking",
-        "projectPath": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\Tracking.csproj",
+        "projectPath": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\Tracking.csproj",
         "packagesPath": "C:\\Users\\adewangan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\",
+        "outputPath": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adewangan\\AppData\\Roaming\\NuGet\\NuGet.Config"

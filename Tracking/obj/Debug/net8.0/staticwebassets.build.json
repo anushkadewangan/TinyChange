@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3om0BNsOEw0BGV97R4PiYYnpMqETe95JKD0IJVE9M4A=",
+  "Hash": "oznWtNknvYo6BYUMG0QtPTLgemC9JFOF12qDLREpTaM=",
   "Source": "Tracking",
   "BasePath": "_content/Tracking",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Tracking\\wwwroot",
       "Source": "Tracking",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\",
       "BasePath": "_content/Tracking",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Tracking.styles.css",
+      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Tracking.styles.css",
       "SourceId": "Tracking",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/Tracking",
       "RelativePath": "Tracking.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Tracking.styles.css"
+      "OriginalItemSpec": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Tracking.styles.css"
     },
     {
-      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Tracking.bundle.scp.css",
+      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Tracking.bundle.scp.css",
       "SourceId": "Tracking",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Tracking",
       "RelativePath": "Tracking.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Tracking.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Tracking.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\app.css",
       "SourceId": "Tracking",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\",
       "BasePath": "_content/Tracking",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "Tracking",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\",
       "BasePath": "_content/Tracking",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "Tracking",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\",
       "BasePath": "_content/Tracking",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\favicon.png",
       "SourceId": "Tracking",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\",
       "BasePath": "_content/Tracking",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\js\\chart-interop.js",
+      "Identity": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\js\\chart-interop.js",
       "SourceId": "Tracking",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\Tracking\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\adewangan\\OneDrive - NVIDIA Corporation\\Desktop\\PP\\Project\\TinyChange\\Tracking\\wwwroot\\",
       "BasePath": "_content/Tracking",
       "RelativePath": "js/chart-interop.js",
       "AssetKind": "All",

@@ -1,0 +1,168 @@
+@page "/calendar"
+@rendermode InteractiveServer
+
+<PageTitle>Calendar</PageTitle>
+
+<h1>Calendar</h1>
+
+<div class="months-container mb-4">
+    @foreach (var month in _months)
+    {
+        <button class="btn @(selectedMonth == month ? "btn-primary" : "btn-outline-primary") m-1"
+                @onclick="() => SelectMonth(month)">
+            @month
+        </button>
+    }
+</div>
+
+@if (selectedMonth != null)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered calendar-table">
+            <thead>
+                <tr>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var firstDay = new DateTime(DateTime.Now.Year, Array.IndexOf(_months, selectedMonth) + 1, 1);
+                    var daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, Array.IndexOf(_months, selectedMonth) + 1);
+                    var firstDayOfWeek = (int)firstDay.DayOfWeek;
+                    var currentDay = 1;
+                }
+
+                @for (int week = 0; week < 6 && currentDay <= daysInMonth; week++)
+                {
+                    <tr>
+                        @for (int dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
+                        {
+                            @if ((week == 0 && dayOfWeek < firstDayOfWeek) || currentDay > daysInMonth)
+                            {
+                                <td class="empty-cell"></td>
+                            }
+                            else
+                            {
+                                var day = currentDay;
+                                <td class="calendar-cell">
+                                    <div class="date-number">@currentDay</div>
+                                    <input type="text"
+                                           class="form-control calendar-input"
+                                           value="@GetCalendarNote(selectedMonth, day)"
+                                           @onchange="@(e => UpdateCalendarNote(selectedMonth, day, e))"
+                                           placeholder="Add notes..." />
+                                    @{currentDay++;}
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<style>
+    .months-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .calendar-table {
+        table-layout: fixed;
+    }
+
+    .calendar-table th {
+        text-align: center;
+        background-color: #f8f9fa;
+    }
+
+    .calendar-cell {
+        height: 100px;
+        padding: 5px !important;
+        vertical-align: top;
+    }
+
+    .empty-cell {
+        background-color: #f8f9fa;
+    }
+
+    .date-number {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .calendar-input {
+        border: none;
+        background-color: transparent;
+        width: 100%;
+        font-size: 0.9rem;
+        min-height: 60px;
+    }
+
+    .calendar-input:focus {
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: none;
+        border: 1px solid #dee2e6;
+    }
+
+    .calendar-input::placeholder {
+        color: #ccc;
+        font-size: 0.8rem;
+    }
+</style>
+
+@code {
+    private readonly string[] _months = new[]
+    {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
+
+    private string? selectedMonth;
+
+    private Dictionary<string, Dictionary<int, string>> _calendarData = new();
+
+    private void SelectMonth(string month)
+    {
+        selectedMonth = month;
+        if (!_calendarData.ContainsKey(month))
+        {
+            _calendarData[month] = new Dictionary<int, string>();
+        }
+    }
+
+    private string GetCalendarNote(string month, int day)
+    {
+        return _calendarData.GetValueOrDefault(month)?.GetValueOrDefault(day) ?? "";
+    }
+
+    private void UpdateCalendarNote(string month, int day, ChangeEventArgs e)
+    {
+        var note = e.Value?.ToString() ?? "";
+        
+        if (!_calendarData.ContainsKey(month))
+        {
+            _calendarData[month] = new Dictionary<int, string>();
+        }
+
+        if (string.IsNullOrWhiteSpace(note))
+        {
+            if (_calendarData[month].ContainsKey(day))
+            {
+                _calendarData[month].Remove(day);
+            }
+        }
+        else
+        {
+            _calendarData[month][day] = note;
+        }
+    }
+}

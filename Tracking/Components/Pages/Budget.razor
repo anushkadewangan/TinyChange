@@ -1,0 +1,134 @@
+@page "/budget"
+@using System.Drawing
+@rendermode InteractiveServer
+
+<PageTitle>Budget</PageTitle>
+
+<h1>Budget</h1>
+
+<div class="table-responsive mt-4">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Amount Spent (₹)</th>
+                <th>Category</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in _budgetEntries)
+            {
+                <tr>
+                    <td>@entry.Date.ToShortDateString()</td>
+                    <td>@entry.Amount.ToString("F2")</td>
+                    <td>@entry.Category</td>
+                    <td>@entry.Notes</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" @onclick="() => DeleteEntry(entry)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <input type="date" 
+                           class="form-control"
+                           @bind="newEntry.Date" />
+                </td>
+                <td>
+                    <input type="number" 
+                           class="form-control"
+                           step="0.01"
+                           min="0"
+                           @bind="newEntry.Amount" />
+                </td>
+                <td>
+                    <select class="form-select" @bind="newEntry.Category">
+                        <option value="">Select category</option>
+                        @foreach (var category in _categories)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" 
+                           class="form-control"
+                           @bind="newEntry.Notes" />
+                </td>
+                <td>
+                    <button class="btn btn-primary" @onclick="AddEntry">
+                        Add
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4">
+    <h3>Summary</h3>
+    <p>Total Spent: ₹@_budgetEntries.Sum(e => e.Amount).ToString("F2")</p>
+    <div class="row">
+        @foreach (var category in _categories)
+        {
+            var categoryTotal = _budgetEntries.Where(e => e.Category == category).Sum(e => e.Amount);
+            if (categoryTotal > 0)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@category</h5>
+                            <p class="card-text">₹@categoryTotal.ToString("F2")</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private class BudgetEntry
+    {
+        public DateTime Date { get; set; } = DateTime.Today;
+        public decimal Amount { get; set; }
+        public string Category { get; set; } = "";
+        public string Notes { get; set; } = "";
+    }
+
+    private readonly string[] _categories = new[]
+    {
+        "Food", "Transportation", "Housing", "Utilities", 
+        "Entertainment", "Shopping", "Other"
+    };
+
+    private List<BudgetEntry> _budgetEntries = new();
+    private BudgetEntry newEntry = new();
+
+    private void AddEntry()
+    {
+        if (newEntry.Amount > 0 && !string.IsNullOrWhiteSpace(newEntry.Category))
+        {
+            _budgetEntries.Add(new BudgetEntry
+            {
+                Date = newEntry.Date,
+                Amount = newEntry.Amount,
+                Category = newEntry.Category,
+                Notes = newEntry.Notes
+            });
+
+            // Reset the form
+            newEntry = new BudgetEntry();
+        }
+    }
+
+    private void DeleteEntry(BudgetEntry entry)
+    {
+        _budgetEntries.Remove(entry);
+    }
+}
+
