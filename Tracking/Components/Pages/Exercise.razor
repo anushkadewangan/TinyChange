@@ -1,0 +1,170 @@
+@page "/exercise"
+@using System.Drawing
+@rendermode InteractiveServer
+
+<PageTitle>Exercise</PageTitle>
+
+<h1>Exercise</h1>
+
+<div class="months-container mb-4">
+    @foreach (var month in _months)
+    {
+        <button class="btn @(selectedMonth == month ? "btn-primary" : "btn-outline-primary") m-1"
+                @onclick="() => SelectMonth(month)">
+            @month
+        </button>
+    }
+</div>
+
+@if (selectedMonth != null)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Hours Spent</th>
+                    <th>Type</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, Array.IndexOf(_months, selectedMonth) + 1);
+                }
+                @for (int day = 1; day <= daysInMonth; day++)
+                {
+                    var currentDate = new DateTime(DateTime.Now.Year, Array.IndexOf(_months, selectedMonth) + 1, day);
+                    <tr>
+                        <td>@day</td>
+                        <td>@currentDate.DayOfWeek</td>
+                        <td>
+                            <input type="number" 
+                                   class="form-control" 
+                                   min="0"
+                                   max="24"
+                                   step="0.5"
+                                   value="@GetExerciseHours(selectedMonth, day)"
+                                   @onchange="@(e => UpdateExerciseHours(selectedMonth, day, e))" />
+                        </td>
+                        <td>
+                            <select class="form-select" 
+                                    value="@GetExerciseType(selectedMonth, day)"
+                                    @onchange="@(e => UpdateExerciseType(selectedMonth, day, e))">
+                                <option value="">Select type</option>
+                                @foreach (var type in _exerciseTypes)
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" 
+                                   class="form-control"
+                                   value="@GetExerciseNotes(selectedMonth, day)"
+                                   @onchange="@(e => UpdateExerciseNotes(selectedMonth, day, e))" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<style>
+    .months-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+</style>
+
+@code {
+    private readonly string[] _months = new[]
+    {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
+
+    private readonly string[] _exerciseTypes = new[]
+    {
+        "Running", "Walking", "Cycling", "Swimming", "Gym", "Yoga", "Other"
+    };
+
+    private string? selectedMonth;
+
+    private class ExerciseEntry
+    {
+        public double Hours { get; set; }
+        public string? Type { get; set; }
+        public string? Notes { get; set; }
+    }
+
+    private Dictionary<string, Dictionary<int, ExerciseEntry>> _exerciseData = new();
+
+    private void SelectMonth(string month)
+    {
+        selectedMonth = month;
+        if (!_exerciseData.ContainsKey(month))
+        {
+            _exerciseData[month] = new Dictionary<int, ExerciseEntry>();
+        }
+    }
+
+    private double GetExerciseHours(string month, int day)
+    {
+        return _exerciseData.GetValueOrDefault(month)?.GetValueOrDefault(day)?.Hours ?? 0;
+    }
+
+    private string GetExerciseType(string month, int day)
+    {
+        return _exerciseData.GetValueOrDefault(month)?.GetValueOrDefault(day)?.Type ?? "";
+    }
+
+    private string GetExerciseNotes(string month, int day)
+    {
+        return _exerciseData.GetValueOrDefault(month)?.GetValueOrDefault(day)?.Notes ?? "";
+    }
+
+    private void UpdateExerciseHours(string month, int day, ChangeEventArgs e)
+    {
+        if (double.TryParse(e.Value?.ToString(), out double hours))
+        {
+            EnsureExerciseEntryExists(month, day);
+            _exerciseData[month][day].Hours = hours;
+        }
+    }
+
+    private void UpdateExerciseType(string month, int day, ChangeEventArgs e)
+    {
+        var type = e.Value?.ToString();
+        EnsureExerciseEntryExists(month, day);
+        _exerciseData[month][day].Type = type;
+    }
+
+    private void UpdateExerciseNotes(string month, int day, ChangeEventArgs e)
+    {
+        var notes = e.Value?.ToString();
+        EnsureExerciseEntryExists(month, day);
+        _exerciseData[month][day].Notes = notes;
+    }
+
+    private void EnsureExerciseEntryExists(string month, int day)
+    {
+        if (!_exerciseData.ContainsKey(month))
+        {
+            _exerciseData[month] = new Dictionary<int, ExerciseEntry>();
+        }
+        if (!_exerciseData[month].ContainsKey(day))
+        {
+            _exerciseData[month][day] = new ExerciseEntry
+            {
+                Hours = 0,
+                Type = "",
+                Notes = ""
+            };
+        }
+    }
+}
+
